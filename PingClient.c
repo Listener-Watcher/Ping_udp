@@ -98,7 +98,15 @@ int main(int argc, char **argv) {
 		}
 	}
 	float loss_rate = packet_loss/10.0*100;
-	average = average/(10-packet_loss);
+	if(packet_loss!=10)
+		average = average/(10-packet_loss);
+	else 
+	{
+		average = 0;
+		max = 0;
+		min = 0;
+	}
+	
 	printf("--- ping statistics --- %d packets transmitted, %d received, %.3f%%",i,10-packet_loss,loss_rate);
 	printf(" packet loss rtt min/avg/max= %.3f %.3f %.3f ms",min,average,max);
 	close(sockfd);
